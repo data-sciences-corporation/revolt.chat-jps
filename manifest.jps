@@ -24,12 +24,22 @@
             {
             "type" : "string",
             "name" : "customUrl",
-            "caption" : "A custom URL (already registered with a public DNS provider)."
+            "caption" : "."
         },
         {
             "type": "checkbox",
-            "caption": "Capcha proptection.",
-            "value": true
+            "caption": "Email authentication.",
+            "value": false
+          },
+          {
+            "type": "checkbox",
+            "caption": "Captcha.",
+            "value": false
+          },
+          {
+            "type": "checkbox",
+            "caption": "Invite only.",
+            "value": false
           }
         ]        
     },
