@@ -20,7 +20,7 @@
             {
                 "name": "url",
                 "type": "checkbox",
-                "caption": "Use custom URL for your revolt server.",
+                "caption": "Use a custom URL for your revolt server.",
                 "value": false,
                 "default": false,
                 "hidden": false,
@@ -28,7 +28,7 @@
                     "true": [
                         {
                             "type": "displayfield",
-                            "value": "Insert a URL to be configured into your Revolt server. (i.e. http://revolt.mydomain.com)",
+                            "value": "Insert a URL to be configured into your Revolt server. (e.g. http://revolt.mydomain.com)",
                             "hideLabel": true
                         },
                         {
