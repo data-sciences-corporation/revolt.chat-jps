@@ -56,6 +56,7 @@ if [[ $# -ne 1 ]]; then
 fi
 url=$1
 echo "[$script] Cloning self host project from: 'https://github.com/revoltchat/self-hosted'" >> INSTALL_LOG
+echo -e "\n----->[$script]\n<0-yes> <1-no>\n captcha: $captcha\n email: $email\n inviteonly: $inviteonly\n url: $url\n<-----" >> INSTALL_LOG
 git clone https://github.com/revoltchat/self-hosted revolt
 chown -R docker. /root/revolt
 cd /root/revolt/
@@ -84,7 +85,6 @@ public_key=$(openssl ec -in vapid_private.pem -outform DER | tail -c 65 | base64
 sed -i "s/REVOLT_VAPID_PRIVATE_KEY=.*/# REVOLT_VAPID_PRIVATE_KEY=$private_key/" .env
 sed -i "s/REVOLT_VAPID_PUBLIC_KEY=.*/# REVOLT_VAPID_PUBLIC_KEY=$public_key/" .env
 sed -i "/# --> Please replace these.*/d" .env # Clean create key warning
-echo -e "\n----->[$script]\n<0-yes> <1-no>\n captcha: $captcha\n email: $email\n inviteonly: $inviteonly\n url: $url\n<-----" >> INSTALL_LOG
-echo "[$script] Running docker compose up."
+echo "[$script] Running docker compose with custom configuration." >> INSTALL_LOG
 # Deploy Revolt.chat services
 docker-compose up -d
