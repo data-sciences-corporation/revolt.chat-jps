@@ -4,7 +4,7 @@ logfile="/var/log/revolt-jps-install.log"
 set -o errexit -o pipefail -o noclobber -o nounset
 ! getopt --test > /dev/null 
 if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
-    echo '[$script] Requires `getopt`.'  >> INSTALL_LOG
+    echo '[$script] Requires `getopt`.' >> $logfile
     exit 1
 fi
 
@@ -56,7 +56,7 @@ if [[ $# -ne 1 ]]; then
     exit 4
 fi
 url=$1
-echo "[$script] Cloning self host project from: 'https://github.com/revoltchat/self-hosted'" >> INSTALL_LOG
+echo "[$script] Cloning self host project from: 'https://github.com/revoltchat/self-hosted'" >> $logfile
 echo -e "\n----->[$script]\n<0-yes> <1-no>\n captcha: $captcha\n email: $email\n inviteonly: $inviteonly\n url: $url\n<-----" >> $logfile
 git clone https://github.com/revoltchat/self-hosted revolt
 chown -R docker. /root/revolt
