@@ -58,6 +58,14 @@ chown -R docker. /root/revolt
 cd /root/revolt/
 cp .env.example .env
 # Update settings in environment file
+url=$(printf '%s\n' "$url" | sed -e 's/[]\/$*.^[]/\\&/g'); # Put relevant escape characters into url string 
 sed -i 's/http:\/\/local.revolt.chat/$url/' .env
-sed -i 's/REVOLT_UNSAFE_NO_CAPTCHA=/REVOLT_UNSAFE_NO_CAPTCHA=$captcha \n# /' .env 
-#docker-compose up -d
+sed -i 's/REVOLT_UNSAFE_NO_CAPTCHA=/REVOLT_UNSAFE_NO_CAPTCHA=$captcha # Default: /' .env
+sed -i 's/REVOLT_INVITE_ONLY=/REVOLT_INVITE_ONLY=$inviteonly # Default: /' .env
+sed -i 's/REVOLT_UNSAFE_NO_EMAIL=/REVOLT_UNSAFE_NO_EMAIL=$email # Default: /' .env
+if [[ $email -eq 0 ]]; then
+    sed -i 's/# REVOLT_SMTP_USERNAME=noreply@example.com/REVOLT_SMTP_USERNAME=noreply@za.cloudlet.cloud/' .env
+    sed -i 's/# REVOLT_SMTP_HOST=smtp.example.com/REVOLT_SMTP_HOST=smtp.example.com/' .env
+    sed -i 's/# REVOLT_SMTP_FROM=Revolt <noreply@example.com>/REVOLT_SMTP_FROM=Revolt <noreply@za.cloudlet.cloud>/' .env
+fi
+docker-compose up -d
