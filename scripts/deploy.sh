@@ -1,8 +1,9 @@
 #!/bin/bash
+script="deploy.sh"
 set -o errexit -o pipefail -o noclobber -o nounset
 ! getopt --test > /dev/null 
 if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
-    echo '[$0] Requires `getopt`.'  >> INSTALL_LOG
+    echo '[$script] Requires `getopt`.'  >> INSTALL_LOG
     exit 1
 fi
 
@@ -42,7 +43,7 @@ while true; do
             break
             ;;
         *)
-            echo "[$0] Unhandled option [$1]." >> INSTALL_LOG
+            echo "[deploy.sh] Unhandled option [$1]." >> INSTALL_LOG
             exit 3
             ;;
     esac
@@ -50,16 +51,16 @@ done
 
 # handle non-option arguments
 if [[ $# -ne 1 ]]; then
-    echo "[$0] A URL is required." >> INSTALL_LOG
+    echo "[$script] A URL is required." >> INSTALL_LOG
     exit 4
 fi
 url=$1
-echo -e "\n----->[$0]\n<0-yes> <1-no>\n captcha: $captcha\n email: $email\n inviteonly: $inviteonly\n url: $url\n<-----" >> INSTALL_LOG
-echo "[$0] Cloning self host project from: 'https://github.com/revoltchat/self-hosted'" >> INSTALL_LOG
+echo "[$script] Cloning self host project from: 'https://github.com/revoltchat/self-hosted'" >> INSTALL_LOG
 git clone https://github.com/revoltchat/self-hosted revolt
 chown -R docker. /root/revolt
 cd /root/revolt/
 cp .env.example .env
+echo "[$script] Configuring user environment."
 # Configure the revolt URL
 url=$(printf '%s\n' "$url" | sed -e 's/[]\/$*.^[]/\\&/g'); # Put relevant escape characters into url string 
 sed -i "s/http:\/\/local.revolt.chat/$url/" .env
@@ -83,6 +84,7 @@ public_key=$(openssl ec -in vapid_private.pem -outform DER | tail -c 65 | base64
 sed -i "s/REVOLT_VAPID_PRIVATE_KEY=.*/# REVOLT_VAPID_PRIVATE_KEY=$private_key/" .env
 sed -i "s/REVOLT_VAPID_PUBLIC_KEY=.*/# REVOLT_VAPID_PUBLIC_KEY=$public_key/" .env
 sed -i "/# --> Please replace these.*/d" .env # Clean create key warning
-
+echo -e "\n----->[$script]\n<0-yes> <1-no>\n captcha: $captcha\n email: $email\n inviteonly: $inviteonly\n url: $url\n<-----" >> INSTALL_LOG
+echo "[$script] Running docker compose up."
 # Deploy Revolt.chat services
 docker-compose up -d
