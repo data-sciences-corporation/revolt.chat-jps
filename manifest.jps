@@ -1,0 +1,56 @@
+{
+    "type": "install",
+    "version": "0.22.03.09-alpha",
+    "id": "revolt",
+    "baseUrl": "https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/master",
+    "description":
+    {
+        "text": "text/description.md",
+        "short": "A docker based deployment of Revolt.chat as a Service"
+    },
+    "logo": "https://github.com/revoltchat/documentation/blob/master/static/img/logo.png",
+    "name": "Revolt.chat",
+    "targetRegions":
+    {
+        "type": "vz7"
+    },
+    "globals":
+    {
+        "password": "${fn.password(20)}"
+    },
+    "settings":
+    {},
+    "nodes":
+    [
+        {
+            "cloudlets": 32,
+            "nodeType": "dockerengine",
+            "nodeGroup": "revolt",
+            "displayName": "Revolt.chat",
+            "extip": true,
+            "count": "1",
+            "env":
+            {
+                "JELASTIC_PORTS": "443, 5001, 5015, 5060, 5061, 5090, 2528"
+            }
+        }
+    ],
+    "onInstall":
+    [
+        "deploy"
+    ],
+    "actions":
+    {
+        "deploy":
+        {
+            "cmd [revolt]":
+            [
+                "echo 'Deploying Revolt.chat containers' > INSTALL_LOG",
+                "curl -fsS https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/main/scripts/deploy.sh | sh -s '${nodes.3cx[0].url}' '${nodes.3cx[0].extIPs[0]}' ",
+                "echo 'Deployment complete' > INSTALL_LOG"
+            ]
+        }
+    },
+    "skipNodeEmails": "true",
+    "success": "text/success.md"
+}
