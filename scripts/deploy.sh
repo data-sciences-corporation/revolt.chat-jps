@@ -57,7 +57,7 @@ if [[ $# -ne 1 ]]; then
 fi
 url=$1
 echo "[$script] Cloning self host project from: 'https://github.com/revoltchat/self-hosted'" >> $logfile
-echo -e "\n----->[$script]\n<0-yes> <1-no>\n captcha: $captcha\n email: $email\n inviteonly: $inviteonly\n url: $url\n<-----" >> $logfile
+echo -e "----->[$script]\n<0-yes> <1-no>\n captcha: $captcha\n email: $email\n inviteonly: $inviteonly\n url: $url\n<-----" >> $logfile
 git clone https://github.com/revoltchat/self-hosted revolt
 chown -R docker. /root/revolt
 cd /root/revolt/
