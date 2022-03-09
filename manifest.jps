@@ -3,53 +3,73 @@
     "version": "0.22.03.09-dev",
     "id": "revolt",
     "baseUrl": "https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/master",
-    "description":
-    {
+    "description": {
         "text": "text/description.md",
         "short": "A docker based deployment of Revolt.chat as a Service"
     },
     "logo": "https://github.com/revoltchat/documentation/blob/master/static/img/logo.png",
     "name": "Revolt.chat",
-    "targetRegions":
-    {
+    "targetRegions": {
         "type": "vz7"
     },
-    "globals":
-    {
+    "globals": {
         "password": "${fn.password(20)}"
     },
-    "settings":
-    {
-        "fields":
-        [
+    "settings": {
+        "fields": [
             {
-                "type": "string",
-                "name": "customUrl",
-                "value": "empty for default",
-                "caption": "A custom URL"
+                "name": "url",
+                "type": "checkbox",
+                "caption": "Use custom URL for your revolt server.",
+                "value": false,
+                "default": false,
+                "hidden": false,
+                "showIf": {
+                    "true": [
+                        {
+                            "type": "displayfield",
+                            "value": "Insert a URL to be configured into your Revolt server. (i.e. http://revolt.mydomain.com)",
+                            "hideLabel": true
+                        },
+                        {
+                            "hideLabel": true,
+                            "type": "string",
+                            "name": "customUrl",
+                            "caption": "URL"
+                        }
+                    ]
+                }
             },
             {
-                "name" : "captcha",
+                "name": "captcha",
                 "type": "checkbox",
-                "caption": "Captcha protection",
+                "caption": "Enable Captcha protection for your Revolt server.",
                 "value": false
             },
             {
-                "name" : "email",
+                "name": "email",
                 "type": "checkbox",
-                "caption": "Email authentication",
+                "caption": "Enable e-mail authentication for your Revolt server",
                 "value": false
             },
             {
-                "name" : "inviteonly",
+                "name": "inviteonly",
                 "type": "checkbox",
-                "caption": "Invite only",
-                "value": false
+                "caption": "Enable Invite-Only mode.",
+                "value": false,
+                "showIf": {
+                    "true": [
+                        {
+                            "type": "displayfield",
+                            "value": "Users will not be able to create an account without an invititation from an existing user.",
+                            "hideLabel": true
+                        }
+                    ]
+                }
             }
         ]
     },
-    "nodes":
-    [
+    "nodes": [
         {
             "cloudlets": 32,
             "nodeType": "dockerengine",
@@ -57,22 +77,17 @@
             "displayName": "Revolt.chat",
             "extip": true,
             "count": "1",
-            "env":
-            {
+            "env": {
                 "JELASTIC_PORTS": "3000, 5000, 7000, 8000, 9000"
             }
         }
     ],
-    "onInstall":
-    [
+    "onInstall": [
         "deploy"
     ],
-    "actions":
-    {
-        "deploy":
-        {
-            "cmd [revolt]":
-            [
+    "actions": {
+        "deploy": {
+            "cmd [revolt]": [
                 "echo 'Deploying revolt containers' > INSTALL_LOG",
                 "curl -fsS https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/main/scripts/deploy.sh | bash -s -- -i '${nodes.revolt[0].url}' ",
                 "echo 'All steps processed.' >> INSTALL_LOG"
