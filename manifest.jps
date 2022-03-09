@@ -20,28 +20,33 @@
     },
     "settings":
     {
-        "fields" : [
+        "fields":
+        [
             {
-            "type" : "string",
-            "name" : "customUrl",
-            "caption" : "."
-        },
-        {
-            "type": "checkbox",
-            "caption": "Email authentication.",
-            "value": false
-          },
-          {
-            "type": "checkbox",
-            "caption": "Captcha.",
-            "value": false
-          },
-          {
-            "type": "checkbox",
-            "caption": "Invite only.",
-            "value": false
-          }
-        ]        
+                "type": "string",
+                "name": "customUrl",
+                "value": "empty for default",
+                "caption": "A custom URL"
+            },
+            {
+                "name" : "captcha",
+                "type": "checkbox",
+                "caption": "Captcha protection",
+                "value": true
+            },
+            {
+                "name" : "email",
+                "type": "checkbox",
+                "caption": "Email authentication",
+                "value": true
+            },
+            {
+                "name" : "inviteonly",
+                "type": "checkbox",
+                "caption": "Invite only",
+                "value": true
+            }
+        ]
     },
     "nodes":
     [
