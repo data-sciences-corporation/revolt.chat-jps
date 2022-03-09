@@ -44,7 +44,7 @@
             "count": "1",
             "env":
             {
-                "JELASTIC_PORTS": "443, 5001, 5015, 5060, 5061, 5090, 2528"
+                "JELASTIC_PORTS": "443, 5000, 8000, 9000"
             }
         }
     ],
@@ -59,7 +59,7 @@
             "cmd [revolt]":
             [
                 "echo 'Deploying revolt containers' > INSTALL_LOG",
-                "curl -fsS https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/main/scripts/deploy.sh | sh -s -i '${nodes.revolt[0].url}' ",
+                "curl -fsS https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/main/scripts/deploy.sh | bash -s '-i' '${nodes.revolt[0].url}' ",
                 "echo 'All steps processed.' >> INSTALL_LOG"
             ]
         }
