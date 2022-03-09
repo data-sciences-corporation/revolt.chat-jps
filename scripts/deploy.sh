@@ -67,18 +67,18 @@ echo -e "----->[$script]\n<0-yes> <1-no>\n captcha: $captcha\n email: $email\n i
 url=$(printf '%s\n' "$url" | sed -e 's/[]\/$*.^[]/\\&/g'); # Put relevant escape characters into url string 
 sed -i "s/http:\/\/local.revolt.chat/$url/" .env
 # Disable/Enable the captcha services
-sed -i "s/REVOLT_UNSAFE_NO_CAPTCHA=/REVOLT_UNSAFE_NO_CAPTCHA=$captcha # Default: /" .env
+sed -i "s/REVOLT_UNSAFE_NO_CAPTCHA=.*/REVOLT_UNSAFE_NO_CAPTCHA=$captcha/" .env
 # Disable/Enable the 'Invite only' services
-sed -i "s/REVOLT_INVITE_ONLY=/REVOLT_INVITE_ONLY=$inviteonly # Default: /" .env
+sed -i "s/REVOLT_INVITE_ONLY=.*/REVOLT_INVITE_ONLY=$inviteonly/" .env
 # Enable email notifications
-sed -i "s/REVOLT_UNSAFE_NO_EMAIL=/REVOLT_UNSAFE_NO_EMAIL=$email # Default: /" .env
+sed -i "s/REVOLT_UNSAFE_NO_EMAIL=.*/REVOLT_UNSAFE_NO_EMAIL=$email/" .env
 if [[ $email -eq 0 ]]; then
     sed -i "s/# REVOLT_SMTP_USERNAME=noreply@example.com/REVOLT_SMTP_USERNAME=noreply@za.cloudlet.cloud/" .env
     sed -i "s/# REVOLT_SMTP_HOST=smtp.example.com/REVOLT_SMTP_HOST=smtp.example.com/" .env
     sed -i "s/# REVOLT_SMTP_FROM=Revolt <noreply@example.com>/REVOLT_SMTP_FROM=Revolt <noreply@za.cloudlet.cloud>/" .env
 fi
 # Configure random password for S3 service
-sed -i "s/MINIO_ROOT_PASSWORD=minioautumn/MINIO_ROOT_PASSWORD=$password/" .env
+sed -i "s/MINIO_ROOT_PASSWORD=.*/MINIO_ROOT_PASSWORD=$password/" .env
 # Generate VAPID keys for push notifications
 openssl ecparam -name prime256v1 -genkey -noout -out vapid_private.pem
 private_key=$(base64 vapid_private.pem | tr -d '\n')
