@@ -78,13 +78,13 @@ if [[ $email -eq 0 ]]; then
     sed -i "s/# REVOLT_SMTP_FROM=Revolt <noreply@example.com>/REVOLT_SMTP_FROM=Revolt <noreply@za.cloudlet.cloud>/" .env
 fi
 # Configure random password for S3 service
-sed -i "s/MINIO_ROOT_PASSWORD=minioautumn/MINIO_ROOT_PASSWORD=$password # Default: /" .env
+sed -i "s/MINIO_ROOT_PASSWORD=minioautumn/MINIO_ROOT_PASSWORD=$password/" .env
 # Generate VAPID keys for push notifications
 openssl ecparam -name prime256v1 -genkey -noout -out vapid_private.pem
 private_key=$(base64 vapid_private.pem | tr -d '\n')
 public_key=$(openssl ec -in vapid_private.pem -outform DER | tail -c 65 | base64 | tr '/+' '_-' | tr -d '\n' | grep -v 'EC Key')
-sed -i "s/REVOLT_VAPID_PRIVATE_KEY=.*/# REVOLT_VAPID_PRIVATE_KEY=$private_key/" .env
-sed -i "s/REVOLT_VAPID_PUBLIC_KEY=.*/# REVOLT_VAPID_PUBLIC_KEY=$public_key/" .env
+sed -i "s/REVOLT_VAPID_PRIVATE_KEY=.*/REVOLT_VAPID_PRIVATE_KEY=$private_key/" .env
+sed -i "s/REVOLT_VAPID_PUBLIC_KEY=.*/REVOLT_VAPID_PUBLIC_KEY=$public_key/" .env
 sed -i "/# --> Please replace these.*/d" .env # Clean create key warning
 echo "[$script] Running docker compose with custom configuration." >> $logfile
 # Deploy Revolt.chat services
