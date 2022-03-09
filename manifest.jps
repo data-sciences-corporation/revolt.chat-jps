@@ -13,7 +13,8 @@
         "type": "vz7"
     },
     "globals": {
-        "password": "${fn.password(20)}"
+        "password": "${fn.password(20)}",
+        "logfile":"/var/log/jps-revolt-install.log"
     },
     "settings": {
         "fields": [
@@ -109,9 +110,9 @@
     "actions": {
         "deploy": {
             "cmd [revolt]": [
-                "echo '[START] Action-Deploy' > INSTALL_LOG",
+                "echo '[START] Action-Deploy' > '${globals.logfile}'",
                 "curl -fsS https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/main/scripts/deploy.sh | bash -s -- -i -p '${globals.password}' '${nodes.revolt[0].url}' ",
-                "echo '[ END ] Action-Deploy' >> INSTALL_LOG"
+                "echo '[ END ] Action-Deploy' >> '${globals.logfile}'"
             ]
         }
     },
