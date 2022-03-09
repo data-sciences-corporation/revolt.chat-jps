@@ -1,6 +1,6 @@
 {
     "type": "install",
-    "version": "0.22.03.09-alpha",
+    "version": "0.22.03.09-dev",
     "id": "revolt",
     "baseUrl": "https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/master",
     "description":
