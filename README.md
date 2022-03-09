@@ -1,4 +1,5 @@
-# Jelastic - Revolt.chat deployment
+# Jelastic - Revolt.chat as a Service
+
 ![Revolt Logo](https://github.com/revoltchat/documentation/blob/master/static/img/logo.png?raw=true)
 
 * This is a docker container instance, leveraging a Jelastic curated docker instance.
@@ -16,7 +17,7 @@ No special instructions should be needed.
 ### Hosters
 
 * [JCA] Add a "New Installation" in the marketplace and copy the contents of the .jps file into the text box.
-Once published, users will find it in their marketplace catalog.
+  Once published, users will find it in their marketplace catalog.
 
 ## Support
 
