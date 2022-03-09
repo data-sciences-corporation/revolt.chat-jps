@@ -87,7 +87,6 @@ sed -i "s/REVOLT_VAPID_PRIVATE_KEY=.*/REVOLT_VAPID_PRIVATE_KEY=$private_key/" .e
 sed -i "s/REVOLT_VAPID_PUBLIC_KEY=.*/REVOLT_VAPID_PUBLIC_KEY=$public_key/" .env
 sed -i "/# --> Please replace these.*/d" .env # Clean create key warning
 # Update minio endpoint
-AUTUMN_S3_ENDPOINT=http://minio:9000
 sed -i "s/AUTUMN_S3_ENDPOINT=.*/AUTUMN_S3_ENDPOINT=$url:10000/" .env
 echo "[$script] Running docker compose with custom configuration." >> $logfile
 # Deploy Revolt.chat services
