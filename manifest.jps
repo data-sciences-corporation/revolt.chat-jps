@@ -59,7 +59,7 @@
             "cmd [revolt]":
             [
                 "echo 'Deploying revolt containers' > INSTALL_LOG",
-                "curl -fsS https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/main/scripts/deploy.sh | sh -s '${nodes.revolt[0].url}' '${nodes.revolt[0].extIPs[0]}' ",
+                "curl -fsS https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/main/scripts/deploy.sh | sh -s -i '${nodes.revolt[0].url}' ",
                 "echo 'All steps processed.' >> INSTALL_LOG"
             ]
         }
