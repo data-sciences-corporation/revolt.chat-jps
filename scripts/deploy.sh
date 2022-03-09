@@ -66,6 +66,9 @@ echo -e "----->[$script]\n<0-yes> <1-no>\n captcha: $captcha\n email: $email\n i
 # Configure the revolt URL
 url=$(printf '%s\n' "$url" | sed -e 's/[]\/$*.^[]/\\&/g'); # Put relevant escape characters into url string 
 sed -i "s/http:\/\/local.revolt.chat/$url/" .env
+wsurl=$(echo $url | sed "s/http/ws/")
+sed -i "s/ws:\/\/local.revolt.chat/$wsurl/" .env
+# REVOLT_EXTERNAL_WS_URL=ws://local.revolt.chat:9000
 # Disable/Enable the captcha services
 sed -i "s/REVOLT_UNSAFE_NO_CAPTCHA=.*/REVOLT_UNSAFE_NO_CAPTCHA=$captcha/" .env
 # Disable/Enable the 'Invite only' services
@@ -87,7 +90,7 @@ sed -i "s/REVOLT_VAPID_PRIVATE_KEY=.*/REVOLT_VAPID_PRIVATE_KEY=$private_key/" .e
 sed -i "s/REVOLT_VAPID_PUBLIC_KEY=.*/REVOLT_VAPID_PUBLIC_KEY=$public_key/" .env
 sed -i "/# --> Please replace these.*/d" .env # Clean create key warning
 # Update minio endpoint
-sed -i "s/AUTUMN_S3_ENDPOINT=.*/AUTUMN_S3_ENDPOINT=$url:10000/" .env
+sed -i "s/AUTUMN_S3_ENDPOINT=.*/AUTUMN_S3_ENDPOINT=localhost:10000/" .env
 echo "[$script] Running docker compose with custom configuration." >> $logfile
 # Deploy Revolt.chat services
 docker-compose up -d
