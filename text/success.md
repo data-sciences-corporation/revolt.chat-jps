@@ -10,4 +10,4 @@
 ### Licensing
 
 Revolt is provided as as open source project.
-No licensing information has been identified as of this build of this readme file). Please look at the [Revolt github project](https://github.com/revoltchat) for further information.
+No licensing information has been identified, as of this build of this readme file. Please look at the [Revolt github project](https://github.com/revoltchat) for further information.
