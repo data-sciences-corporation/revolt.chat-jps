@@ -3,7 +3,7 @@
 ![Revolt Logo](https://github.com/revoltchat/documentation/blob/master/static/img/logo.png?raw=true)
 
 * This is a docker container instance, leveraging a Jelastic curated docker instance.
-* Revolt.chat is an open source alternative to discord.
+* Revolt.chat is an open source, self host (more secure)) alternative to discord.
 
 ## Usage
 
