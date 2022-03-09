@@ -6,8 +6,8 @@ if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
     exit 1
 fi
 
-OPTIONS=cei
-LONGOPTS=captcha,email,inviteonly
+OPTIONS=ceip:
+LONGOPTS=captcha,email,inviteonly,password:
 
 ! PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@")
 if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
@@ -31,6 +31,10 @@ while true; do
             ;;
         -i|--inviteonly)
             inviteonly=0
+            shift
+            ;;
+        -p|--password)
+            password=$2
             shift
             ;;
         --)
@@ -68,4 +72,5 @@ if [[ $email -eq 0 ]]; then
     sed -i "s/# REVOLT_SMTP_HOST=smtp.example.com/REVOLT_SMTP_HOST=smtp.example.com/" .env
     sed -i "s/# REVOLT_SMTP_FROM=Revolt <noreply@example.com>/REVOLT_SMTP_FROM=Revolt <noreply@za.cloudlet.cloud>/" .env
 fi
+sed -i "s/MINIO_ROOT_PASSWORD=minioautumn/MINIO_ROOT_PASSWORD=$password # Default: /" .env
 docker-compose up -d
