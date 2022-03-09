@@ -6,6 +6,7 @@
 
 * URL: ${nodes.revolt[0].url}
 * Public IP address: ${nodes.revolt[0].extIPs[0]}
+* Minio password: ${globals.password}
 
 ### Licensing
 
