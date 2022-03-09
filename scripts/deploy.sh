@@ -34,8 +34,8 @@ while true; do
             shift
             ;;
         -p|--password)
-            password=$2
-            shift
+            password="$2"
+            shift 2
             ;;
         --)
             shift
