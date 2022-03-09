@@ -42,7 +42,7 @@ while true; do
             break
             ;;
         *)
-            echo "[$0] Unhandled option." >> INSTALL_LOG
+            echo "[$0] Unhandled option [$1]." >> INSTALL_LOG
             exit 3
             ;;
     esac
