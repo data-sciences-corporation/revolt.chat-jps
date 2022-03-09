@@ -82,5 +82,7 @@ private_key=$(base64 vapid_private.pem | tr -d '\n')
 public_key=$(openssl ec -in vapid_private.pem -outform DER | tail -c 65 | base64 | tr '/+' '_-' | tr -d '\n' | grep -v 'EC Key')
 sed -i "s/REVOLT_VAPID_PRIVATE_KEY=.*/# REVOLT_VAPID_PRIVATE_KEY=$private_key/" .env
 sed -i "s/REVOLT_VAPID_PUBLIC_KEY=.*/# REVOLT_VAPID_PUBLIC_KEY=$public_key/" .env
+sed -i "/# --> Please replace these.*/d" .env # Clean create key warning
+
 # Deploy Revolt.chat services
 docker-compose up -d
