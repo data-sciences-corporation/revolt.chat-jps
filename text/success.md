@@ -1,10 +1,13 @@
 ## Access:
-### [${nodes.3cx[0].url}](${nodes.3cx[0].url}:5001)
-> The [setup wizard](${nodes.3cx[0].url}:5015/?v=2) will need to be run, before the platform will be available.
+
+### [${nodes.revolt[0].url}](${nodes.revolt[0].url}:5000)
 
 ## Information:
-URL: ${nodes.3cx[0].url} \
-Public IP address: ${nodes.3cx[0].extIPs[0]}
+
+URL: ${nodes.revolt[0].url} 
+Public IP address: ${nodes.revolt[0].extIPs[0]}
 
 ## Licensing:
-You will need to provide your own licence key, as purchased/supplied by 3cx.
+
+Revolt is provided as as open source project.
+No licencing information has been provided yet (as of this build of the readme file). Please look at the [Revolt github project](https://github.com/revoltchat) for further information.
