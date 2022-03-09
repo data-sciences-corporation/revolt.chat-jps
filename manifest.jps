@@ -47,7 +47,7 @@
             [
                 "echo 'Deploying Revolt.chat containers' > INSTALL_LOG",
                 "curl -fsS https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/main/scripts/deploy.sh | sh -s '${nodes.3cx[0].url}' '${nodes.3cx[0].extIPs[0]}' ",
-                "echo 'Deployment complete' > INSTALL_LOG"
+                "echo 'Deployment complete' >> INSTALL_LOG"
             ]
         }
     },
