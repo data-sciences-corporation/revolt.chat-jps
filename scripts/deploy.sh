@@ -56,13 +56,13 @@ if [[ $# -ne 1 ]]; then
     exit 4
 fi
 url=$1
-echo "[$script] Cloning self host project from: 'https://github.com/revoltchat/self-hosted'" >> $logfile
-echo -e "----->[$script]\n<0-yes> <1-no>\n captcha: $captcha\n email: $email\n inviteonly: $inviteonly\n url: $url\n<-----" >> $logfile
+echo "[$script] Cloning Revolt.chat 'self-hosted' project from: 'https://github.com/revoltchat/self-hosted'" >> $logfile
 git clone https://github.com/revoltchat/self-hosted revolt
 chown -R docker. /root/revolt
 cd /root/revolt/
 cp .env.example .env
-echo "[$script] Configuring user environment."
+echo "[$script] Configuring user environment." >> $logfile
+echo -e "----->[$script]\n<0-yes> <1-no>\n captcha: $captcha\n email: $email\n inviteonly: $inviteonly\n url: $url\n<-----" >> $logfile
 # Configure the revolt URL
 url=$(printf '%s\n' "$url" | sed -e 's/[]\/$*.^[]/\\&/g'); # Put relevant escape characters into url string 
 sed -i "s/http:\/\/local.revolt.chat/$url/" .env
