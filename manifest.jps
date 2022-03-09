@@ -19,7 +19,20 @@
         "password": "${fn.password(20)}"
     },
     "settings":
-    {},
+    {
+        "fields" : [
+            {
+            "type" : "string",
+            "name" : "customUrl",
+            "caption" : "A custom URL (already registered with a public DNS provider)."
+        },
+        {
+            "type": "checkbox",
+            "caption": "Capcha proptection.",
+            "value": true
+          }
+        ]        
+    },
     "nodes":
     [
         {
