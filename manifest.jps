@@ -32,19 +32,19 @@
                 "name" : "captcha",
                 "type": "checkbox",
                 "caption": "Captcha protection",
-                "value": true
+                "value": false
             },
             {
                 "name" : "email",
                 "type": "checkbox",
                 "caption": "Email authentication",
-                "value": true
+                "value": false
             },
             {
                 "name" : "inviteonly",
                 "type": "checkbox",
                 "caption": "Invite only",
-                "value": true
+                "value": false
             }
         ]
     },
