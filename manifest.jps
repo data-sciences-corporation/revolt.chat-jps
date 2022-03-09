@@ -36,15 +36,36 @@
                             "type": "string",
                             "name": "customUrl",
                             "caption": "URL"
+                        },
+                        {
+                            "name": "captcha",
+                            "type": "checkbox",
+                            "caption": "Enable hCaptcha protection for your Revolt server.",
+                            "value": false,
+                            "showIf": {
+                                "true": [
+                                    {
+                                        "type": "displayfield",
+                                        "value": "Please provide your hCaptcha details for the URL(https://www.hcaptcha.com)",
+                                        "hideLabel": true
+                                    },
+                                    {
+                                        "hideLabel": false,
+                                        "type": "string",
+                                        "name": "hcaptchaKey",
+                                        "caption": "hCaptcha Sitekey"
+                                    },
+                                    {
+                                        "hideLabel": false,
+                                        "type": "string",
+                                        "name": "hcaptchaSecret",
+                                        "caption": "hCaptcha Secret"
+                                    }
+                                ]
+                            }
                         }
                     ]
                 }
-            },
-            {
-                "name": "captcha",
-                "type": "checkbox",
-                "caption": "Enable Captcha protection for your Revolt server.",
-                "value": false
             },
             {
                 "name": "email",
@@ -90,7 +111,7 @@
             "cmd [revolt]": [
                 "echo '[START] Action-Deploy' > INSTALL_LOG",
                 "curl -fsS https://raw.githubusercontent.com/data-sciences-corporation/revolt.chat-jps/main/scripts/deploy.sh | bash -s -- -i -p '${globals.password}' '${nodes.revolt[0].url}' ",
-                "echo '[END] Action-Deploy' >> INSTALL_LOG"
+                "echo '[ END ] Action-Deploy' >> INSTALL_LOG"
             ]
         }
     },
