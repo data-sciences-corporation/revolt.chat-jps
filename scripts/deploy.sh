@@ -1,6 +1,6 @@
 #!/bin/bash
 script="deploy.sh"
-logfile="/var/log/revolt-jps-install.log"
+logfile="/var/log/jps-revolt-install.log"
 set -o errexit -o pipefail -o noclobber -o nounset
 ! getopt --test > /dev/null 
 if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
