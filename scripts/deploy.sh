@@ -86,6 +86,9 @@ public_key=$(openssl ec -in vapid_private.pem -outform DER | tail -c 65 | base64
 sed -i "s/REVOLT_VAPID_PRIVATE_KEY=.*/REVOLT_VAPID_PRIVATE_KEY=$private_key/" .env
 sed -i "s/REVOLT_VAPID_PUBLIC_KEY=.*/REVOLT_VAPID_PUBLIC_KEY=$public_key/" .env
 sed -i "/# --> Please replace these.*/d" .env # Clean create key warning
+# Update minio endpoint
+AUTUMN_S3_ENDPOINT=http://minio:9000
+sed -i "s/AUTUMN_S3_ENDPOINT=.*/AUTUMN_S3_ENDPOINT=$url:10000/" .env
 echo "[$script] Running docker compose with custom configuration." >> $logfile
 # Deploy Revolt.chat services
 docker-compose up -d
